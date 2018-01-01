@@ -1,0 +1,56 @@
+﻿@using PokerASC.ViewModels
+@using PokerASC.Models
+@using PokerASC.Helpers
+@model SalaViewModel
+@{
+    var jogador = @Model.Sala.Jogadores.Single(j => j.Id == Model.idJogador);
+    var oponentes = Model.Sala.Jogadores.Where(j => j.Id != Model.idJogador);
+
+    var oponenteArray = new Jogador[Model.Capacidade];
+
+    for (int i = 0; i <= oponenteArray.Length - 1; i++)
+        oponenteArray[i] = oponentes.ElementAtOrDefault(i) == null ?  new Jogador() : oponentes.ElementAtOrDefault(i);
+
+    Layout = "_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Styles/cards.css">
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+            <a href="../Vencedor/@Model.Sala.Id" class="popup btn btn-default">Vencedor</a>
+        </div>
+        <div class="col-md-4">@Html.Partial("_JogadorPartial", oponenteArray[0])</div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4">@Html.Partial("_JogadorPartial", oponenteArray[1])</div>
+        <div class="col-md-1">
+            <a href="../Sair/@Model.Sala.Id" class="btn btn-default">Sair</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">@Html.Partial("_JogadorPartial", oponenteArray[2])</div>
+        <div class="col-md-4">
+            <h3 style="color: white;">Sala @Model.Sala.Id - @Model.Sala.Nome</h3>
+            <h3 style="color: white;">Jogadores: @string.Join(", ", Model.Sala.Jogadores.Select(j => j.Usuario.Nome))</h3>
+        </div>
+        <div class="col-md-4">@Html.Partial("_JogadorPartial", oponenteArray[3])</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">@Html.Partial("_JogadorPartial", oponenteArray[4])</div>
+        <div class="col-md-4">
+            <h3 style="color: white;">Seu score: @jogador.GetScore().GetDescription()</h3>
+        </div>
+        <div class="col-md-4">@Html.Partial("_JogadorPartial", oponenteArray[5])</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../Reset/@Model.Sala.Id" class="btn btn-default">Reset</a>
+        </div>
+        <div class="col-md-4" style="font-size: 150%!important;">
+            @Html.Partial("_JogadorPartial", jogador)
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

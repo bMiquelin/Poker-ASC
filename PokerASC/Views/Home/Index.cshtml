@@ -1,0 +1,21 @@
+﻿@model List <PokerASC.Models.Sala>
+
+
+<a href="../Sala/Join/0" class="btn btn-default">Nova Sala</a>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Jogadores</th>
+        <th>Entrar</th>
+    </tr>
+    @foreach(PokerASC.Models.Sala sala in Model)
+    {
+    <tr>
+        <td>@sala.Id</td>
+        <td>@sala.Nome</td>
+        <td>@sala.Jogadores.Count()</td>
+        <td><a class="btn btn-default" href="~/Sala/Join/@sala.Id">Entrar</a></td>
+    </tr>
+    }
+</table>

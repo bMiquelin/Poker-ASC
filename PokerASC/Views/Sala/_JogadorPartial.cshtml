@@ -1,0 +1,15 @@
+﻿@using PokerASC.ViewModels
+@using PokerASC.Models
+@using PokerASC.Helpers
+@model Jogador
+
+@if (Model.Id != 0)
+{
+    <div style="white-space: nowrap; margin: 0; text-align: center;" class="row">
+        <h2 class="playername">@Model.Usuario.Nome</h2>
+        @foreach (PokerASC.Models.Carta carta in @Model.CartasNaMao)
+        {
+            <div class="card @(carta.Naipe.GetDescription()) rank@((int)carta.Rank+ 1)" style="position: inherit; margin: 5px;"><div class="face"></div></div>
+        }
+    </div>
+}

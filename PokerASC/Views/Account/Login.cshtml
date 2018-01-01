@@ -1,0 +1,64 @@
+﻿@using PokerASC.ViewModels
+
+@{
+    @model LoginViewModel
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/Content/Styles/CP.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    <title></title>
+    <style>
+        .validation-summary-errors ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <form class="login-modal centered" method="post" asp-action="Login" asp-controller="Account" asp-antiforgery="true">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend><h2>Sign In</h2></legend>
+                <div class="form-group" style="margin-bottom: 30px;">
+                    <div class="input-group">
+                        <span class="input-group-addon input-lg"><span class="glyphicon glyphicon-envelope"></span></span>
+                        <input placeholder="Email" type="text" name="email" asp-for="Email" class="form-control input-lg" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon input-lg"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input placeholder="Password" type="password" name="password" asp-for="Password" class="form-control input-lg" />
+                    </div>
+                </div>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @*<div class="alert alert-danger child-ul" asp-validation-summary="All" style="visibility: @(ViewBag.Message == null ? "hidden" : "visible");">
+                    <span class="glyphicon glyphicon-remove-circle">
+                    </span>
+                    @ViewBag.Message
+                </div>*@
+                <div class="form-group">
+                    <label class="checkbox-inline" for="rememberme">
+                        <input type="checkbox" asp-for="RememberMe" value="Text" />
+                        Manter-me conectado
+                    </label>
+                </div>
+                <div>
+                    <input type="submit" value="Login" class="btn btn-primary btn-lg btn-block" />
+                </div>
+                <div class="small" style="margin-top: 5px;">
+                    <a href="#">Esqueci minha senha</a>
+                    <a href="#" style="float: right;">Não tenho uma conta</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

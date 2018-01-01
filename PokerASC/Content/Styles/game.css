@@ -1,0 +1,13 @@
+﻿html, body{
+    margin: 0;
+}
+
+.playername{
+    color: white;
+}
+
+
+.toolbar{
+    position: absolute;
+    bottom: 0;
+}

@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using PokerASC.Models
+@using Microsoft.AspNet.Identity
+@{
+    var manager = new UserManager<Usuario>(new UserStore<Usuario>(new ApplicationDbContext()));
+    var usuarioLogado = manager.FindById(User.Identity.GetUserId());
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/Content/Styles/CP.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    @*<script src="~/static/jquery.mask.js" charset="utf-8"></script>*@
+    @*<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>*@
+    <script src="~/Content/Scripts/bmiq.js"></script>
+    @*<script src="/signalr/hubs"></script>*@
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="logo-container">
+                <img src="~/Content/Imagens/logo.gif" alt="" style="height: 60px;" />
+            </div>
+            <div class="menu-container">
+                <nav class="menu-nav">
+                    <ul class="horizontal-ul">
+                        <li><a href="/Home/Index">Home</a></li>
+                        <li><a href="/Account/Login">Login</a></li>
+                    </ul>
+                </nav>
+                <div class="menu-action">
+                    <ul class="horizontal-ul">
+                        <li>
+                            <a href="#" id="master-btn-novo">
+                                <img src="~/Content/Images/glyphicons-191-circle-plus.png" alt="" />
+                                <span>Novo</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/Content/Images/glyphicons-138-cogwheels.png" alt="" />
+                                Configuração
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="content">
+            <div class="content-page">
+                @RenderBody()
+            </div>
+        </div>
+        <footer>
+            &copy; 2018 - Bruno Miquelin
+        </footer>
+    </div>
+
+    <div class="load_modal"></div>
+
+    <form style="display: none;" id="form-img-selector" action="/Management/UploadFile" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" onchange="upload(this)" />
+    </form>
+
+
+    @RenderSection("Scripts", false)
+</body>
+</html>
